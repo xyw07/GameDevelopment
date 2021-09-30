@@ -1,0 +1,48 @@
+- Did you attempt to make your computer player very smart -- i.e., do something more clever than just pick a random legal move?
+
+Yes. AI will choose a legal position where black tiles could be flipped as many as possible.
+When there is a list of positions flipping the same largest number of black tiles, the AI will choose the first one.
+
+- If so, were you able to accomplish this? Is your computer player as smart as you would like?
+
+Yes. First, in ai)palyer module, I will use a dictionary to present all legal positions. In this
+dictionary(called total_btw_num_posi), the key is a tuple which represnted the position of the legal position,
+the value is the total tiles that can be flipped if the tile is created.
+Yes, I think the AI is smart enough. But if we want to make AI smarter to increase difficulty level, there are chances to add more functions to do so.
+But for now, the current difficulty level is enough.
+
+- How did you determine which piece to play next? Tell us about your “pick next move” algorithm
+
+The answer is the same as above.
+More details:
+1. caluate the outline of the occupied tiles
+2. from the outline tiles, if the tile can be aligned: calcalute the this position to the all self tiles in the board.
+Also calcalute how many tiles can be flipped. 
+3. Use a dictionary to store the legal position and can-be-flipped tiles
+4. create a list to store key value pairs where they have the largest number of can-be-flipped tiles
+5. Choose the first one in the list that position will be AI's next move
+
+- How often did your computer program beat you, or your friends, or whoever tested it out for you?
+
+Maybe 60%, My friends and I have played this game for 10 times and we won 4 times.
+
+- How would you improve it in the future?
+I think there are are two main things that could be improved in the future.
+1.algorithm time, space
+(1) My current method to get legal position is from the tiles in the outline to compare every other tile which
+have the same color and then check whether they are aligned to each other. 
+The better way could be:
+From the tile in the outline, we check the 8 directions directly, so that we do not need to check every tiles in the board.
+That could save us a lot of time.
+(2) My current method to get the list of between is that from the aligned tiles, we get the list of between. In this list of between tiles,
+actually, there are lots of invalid positions, like same color tiles and empty space. And then I filter those invalid lists.
+The better way could be:
+Using a recursive function to wirte it. From the middle(the potential tile) to 8 directions, if it hit the invalid position(same color tile or space),
+it become a dead end. Then search another direction recursively. 
+This could save a lot of space, since we do not need to use lists to store some invalid between tiles. And also improve the time effeciency,
+since we do not need to go throug each list and check every tile whether they are valid. We can do it inside the recursive function.
+2. AI can be smarter...if ...
+"Discs played in the corners can't be flipped. If you can't take a corner, you can reduce its effectiveness by taking the squares adjacent to it."
+The quote is ine of the tips from the Internet about how to win the game.
+So maybe in the future, if I want to make the difficulty level higher, I will make the AI considering the importance of corner positions.
+eg.prioritize the tiles that could place on the corner
